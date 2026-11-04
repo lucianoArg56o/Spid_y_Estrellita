@@ -1,4 +1,4 @@
-import { HeadContent, Outlet, createRootRoute } from "@tanstack/react-router";
+import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import appCss from "../styles.css?url";
 
@@ -24,7 +24,11 @@ export const Route = createRootRoute({
       },
     ],
   }),
-  component: () => (
+  component: RootComponent,
+});
+
+function RootComponent() {
+  return (
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <HeadContent />
@@ -33,7 +37,8 @@ export const Route = createRootRoute({
         <QueryClientProvider client={queryClient}>
           <Outlet />
         </QueryClientProvider>
+        <Scripts />
       </body>
     </html>
-  ),
-});
+  );
+}
